@@ -1,0 +1,3197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/static/logo.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Back Office V2 BOT 🏢</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+      background: #021a3c;
+      color: white;
+      font-size:14px;
+    }
+:where(button, a, .btn, .select-selected,[tabindex]):focus-visible{
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 1px;
+  transition: outline-offset 0s, outline 0s;
+}
+   .select-selected:hover {
+      border-color: #16b7ff !important;
+     transition: all 0.3s;
+    }
+   /* #159edb */
+   .select-selected:focus {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 2px rgba(56,189,248,0.25) !important;
+     transition: all 0.3s;
+    }
+    input:hover {
+      border-color: #16b7ff !important;
+     transition: all 0.3s;
+    }
+   /* #159edb */
+   input:focus {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 2px rgba(56,189,248,0.25) !important;
+     transition: all 0.3s;
+    }
+      textarea:hover {
+      border-color: #16b7ff !important;
+     transition: all 0.3s;
+    }
+   /* #159edb */
+    textarea:focus {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 2px rgba(56,189,248,0.25) !important;
+     transition: all 0.3s;
+    }
+ label {
+   font-size:12px;
+   color: rgba(255,255,255,0.85);
+ }
+.topbar{
+  width:100%;
+  height:64px;
+  padding:0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  box-sizing:border-box;
+  background:rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+  .topbar-user{
+  position:relative;
+  margin-left:auto;
+  flex-shrink:0;
+}
+
+.username-btn{
+  height:36px;
+  max-width:220px;
+  padding:0 11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  cursor:pointer;
+  transition:.25s;
+  font-size:14px;
+}
+
+.username-btn:hover{
+  color:#38bdf8;
+  border-color:#38bdf8;
+  background:rgba(56,189,248,.08);
+}
+
+.username-icon{
+  width:17px;
+  height:17px;
+  display:block;
+  fill:currentColor;
+  flex-shrink:0;
+}
+
+.username-text{
+  max-width:140px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.username-arrow{
+  width:12px;
+  height:12px;
+  display:block;
+  fill:currentColor;
+  flex-shrink:0;
+  transition:transform .25s ease;
+}
+
+.topbar-user.open .username-arrow{
+  transform:rotate(180deg);
+}
+
+.username-menu{
+  position:absolute;
+  top:calc(100% + 7px);
+  right:0;
+  z-index:100000;
+  display:none;
+  width:200px;
+  padding:6px;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:9px;
+  background:#0b2344;
+  box-shadow:0 14px 35px rgba(0,0,0,.45);
+}
+
+.topbar-user.open .username-menu{
+  display:block;
+}
+
+.username-menu-info{
+  padding:9px 10px;
+  margin-bottom:5px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.username-menu-info span{
+  display:block;
+  color:rgba(255,255,255,.6);
+  font-size:12px;
+}
+
+.username-menu-info strong{
+  display:block;
+  margin-top:4px;
+  overflow:hidden;
+  color:#fff;
+  font-size:13px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.username-logout{
+  padding:8px 10px !important;
+  display:flex !important;
+  align-items:center;
+  gap:8px;
+  border-radius:6px !important;
+  color:#fff !important;
+  text-decoration:none;
+  transition:.2s;
+}
+
+.username-logout:hover{
+  background:#1668dc !important;
+}
+
+.username-logout svg{
+  width:17px;
+  height:17px;
+  display:block;
+  fill:currentColor;
+  flex-shrink:0;
+}
+
+    .topbar h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+.nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.nav a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    color:rgba(255,255,255,.85);
+    transition:.25s;
+    white-space: nowrap;
+}
+
+.nav a:hover{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+}
+
+/* ACTIVE */
+.nav a.active{
+    background:#1668dc;
+    color:#fff;
+}
+
+.nav a.active .nav-icon{
+    color:#fff;
+}
+    .nav a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.nav-icon{
+    width:19.2px;
+    height:19.2px;
+    min-width:19.2px;
+    min-height:19.2px;
+    fill:currentColor;
+    flex-shrink:0;
+    display:block;
+    overflow:visible;
+    transition:.25s;
+}
+
+    .container {
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+.promo-grid{
+  width:100%;
+  min-width:0;
+  display:grid;
+  grid-template-columns:
+    minmax(320px, 420px)
+    minmax(0, 1fr);
+  gap:16px;
+  align-items:stretch;
+}
+
+.promo-add-card,
+.promo-list-card{
+  min-width:0;
+  height:560px;
+  margin-bottom:0;
+  box-sizing:border-box;
+}
+
+.promo-add-card,
+.promo-list-card{
+  min-width:0;
+  margin-bottom:0;
+}
+
+@media(max-width:900px){
+  .promo-grid{
+    grid-template-columns:minmax(0, 1fr);
+    gap:0;
+  }
+
+  .promo-add-card,
+  .promo-list-card{
+    width:100%;
+    height:auto;
+  }
+}
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      color: #38bdf8;
+      font-size: 16px;
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 6px;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.25);
+      color: white;
+      box-sizing: border-box;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      white-space: pre-wrap;
+    }
+    input{
+      width: 100%;
+      margin-top: 6px;
+      margin-bottom: 12px;
+      padding: 4px 11px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.25);
+      color: white;
+      box-sizing: border-box;
+      outline: none;
+      transition: all 0.3s;
+      height:32px;
+    }
+    button {
+      padding: 0px 15px;
+      border-radius: 6px;
+      border: none;
+      background: #1668dc;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      height: 32px;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #3c89e8;
+    }
+
+    button:active {
+      background: #1554ad;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      text-align: left;
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    th {
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:0 14px;
+    height:28px;
+    border-radius:50px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    margin:0;
+    white-space:nowrap;
+    box-sizing:border-box;
+  transition: all 0.3s;
+}
+    .btn-edit {
+      background: #ffffff0f;
+      color: #fff;
+      border:1px solid rgba(255, 255, 255, .15);
+      font-size:12px;
+    }
+
+    .btn-delete {
+      background: #ffffff0f;
+      color: red;
+      font-size:12px;
+      border:1px solid rgba(255, 255, 255, .15);
+    }
+    .btn-delete:hover{
+      color: #ff7b7b;
+      border:1px solid red;
+      background: #00000024;
+    }
+    .btn-delete:active{
+      color:#d50000;
+      border:1px solid #d50000;
+    }
+    .btn-edit:hover{
+      color:#16b7ff;
+      border:1px solid #16b7ff;
+    }
+    .btn-edit:active{
+      color:#148abf;
+      border:1px solid #148abf;
+    }
+    .small-text {
+      font-size: 12px;
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+
+    .layout-hint {
+      font-size: 13px;
+      opacity: 0.7;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+.status-cell{
+  vertical-align:middle;
+  text-align:center;
+}
+.status-cell .status-switch{
+  margin:0 auto;
+}
+.status-switch{
+  position:relative;
+  width:82px;
+  height:28px;
+  padding:3px;
+  display:flex;
+  align-items:center;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+  color:#fff;
+  text-decoration:none;
+  cursor:pointer;
+  overflow:hidden;
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .15s ease;
+}
+
+/* Active */
+.status-switch.active{
+  justify-content:flex-start;
+  padding-left:10px;
+  padding-right:28px;
+  background:#1668dc;
+  box-shadow:0 0 0 1px rgba(60,137,232,.18);
+}
+
+/* Inactive */
+.status-switch.inactive{
+  justify-content:flex-end;
+  padding-left:28px;
+  padding-right:9px;
+  background:#3a3a3a;
+  border-color:#555;
+}
+
+.status-switch-text{
+  position:relative;
+  z-index:2;
+  display:block;
+  overflow:hidden;
+  color:#fff;
+  font-size:12px;
+  font-weight:600;
+  line-height:1;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.status-switch-knob{
+  position:absolute;
+  top:3px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 2px 7px rgba(0,0,0,.35);
+  transition:left .25s ease;
+}
+
+.status-switch.active .status-switch-knob{
+  left:calc(100% - 25px);
+}
+
+.status-switch.inactive .status-switch-knob{
+  left:3px;
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    height: 64px;
+    padding-inline: 10px;
+    gap: 8px;
+  }
+
+  .topbar h2 {
+    font-size: 17px;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .topbar-user{
+    margin-left:auto;
+  }
+
+  .username-btn{
+    width:36px;
+    min-width:36px;
+    padding:0;
+  }
+
+  .username-text,
+  .username-arrow{
+    display:none;
+  }
+
+  .username-menu{
+    right:0;
+  }
+  .nav {
+    margin-left: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 7px;
+    overflow: visible;
+    flex-shrink: 0;
+  }
+
+  .nav a {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  .nav a .nav-text {
+    display: none;
+  }
+
+  .nav-icon {
+    width: 19.2px;
+    height: 19.2px;
+  }
+}
+.label-required::before {
+    content: "*";
+    display: inline-block;
+    margin-right: 4px;
+    color: #dc4446;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+}
+    /* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 14px; /* nipis */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #555 transparent;
+}
+.login-loading{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.20);
+  z-index:999999;
+}
+
+.login-loading.show{
+  display:flex;
+}
+
+.loading-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  pointer-events:none;
+}
+
+.loading-dots{
+  width:32px;
+  height:32px;
+  position:relative;
+  animation:loadingRotate 1s linear infinite;
+}
+
+.loading-dots span{
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,.85);
+  opacity:.25;
+  animation:dotPulse 1s linear infinite;
+}
+
+.loading-dots span:nth-child(1){ top:0; left:50%; transform:translateX(-50%); }
+.loading-dots span:nth-child(2){ right:0; top:50%; transform:translateY(-50%); animation-delay:.25s; }
+.loading-dots span:nth-child(3){ bottom:0; left:50%; transform:translateX(-50%); animation-delay:.5s; }
+.loading-dots span:nth-child(4){ left:0; top:50%; transform:translateY(-50%); animation-delay:.75s; }
+
+.loading-text{
+  color:#fff;
+  font-size:14px;
+  text-align:center;
+}
+
+@keyframes dotPulse{
+  0%{ opacity:.2; }
+  25%{ opacity:1; }
+  50%{ opacity:.4; }
+  100%{ opacity:.2; }
+}
+
+@keyframes loadingRotate{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+.actions-cell{
+  white-space:nowrap;
+  vertical-align:middle;
+  text-align:center;
+}
+
+.actions-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:nowrap;
+}
+
+.actions-wrap .btn{
+  flex:0 0 auto;
+}
+.promo-list-card{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+.promo-list-card > h3{
+  flex-shrink:0;
+}
+
+.promo-table-scroll{
+  width:100%;
+  flex:1;
+  min-height:0;
+  overflow:auto;
+  border-radius:10px;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  -webkit-overflow-scrolling:touch;
+}
+.promo-add-card{
+  display:flex;
+  flex-direction:column;
+}
+
+.promo-add-card form{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.promo-add-card textarea{
+  flex:1;
+  min-height:160px;
+  max-height:none;
+}
+
+.promo-add-card form > button{
+  align-self:flex-start;
+}
+.promo-table{
+  width:100%;
+  min-width:900px;
+  margin-top:0;
+  table-layout:fixed;
+}
+
+.promo-table th{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#1d395e;
+}
+
+.promo-table th,
+.promo-table td{
+  vertical-align:middle;
+}
+
+.promo-table-scroll::-webkit-scrollbar{
+  width:6px;
+  height:6px;
+}
+
+.promo-table-scroll::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+.promo-table-scroll::-webkit-scrollbar-thumb{
+  background:#4b5563;
+  border-radius:10px;
+}
+
+.promo-table-scroll::-webkit-scrollbar-thumb:hover{
+  background:#6b7280;
+}
+
+@media(max-width:900px){
+  .promo-table-scroll{
+    max-height:480px;
+  }
+}
+.id-col{
+  width:60px;
+}
+
+.title-col{
+  width:auto;
+}
+
+.status-col{
+  width:145px;
+}
+
+.actions-col{
+  width:230px;
+}
+.status-col,
+.actions-col{
+  text-align:center;
+}
+.promo-title-cell{
+  min-width:0;
+}
+
+.promo-title{
+  margin-bottom:5px;
+  overflow:hidden;
+  color:#fff;
+  font-weight:700;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.promo-caption-wrap{
+  min-width:0;
+}
+
+.promo-caption{
+  color:rgba(255,255,255,.72);
+  font-size:12px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+.promo-caption.collapsed{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.promo-caption:not(.collapsed){
+  display:block;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.caption-toggle{
+  width:auto;
+  height:22px;
+  margin-top:4px;
+  padding:0;
+  display:inline-flex;
+  align-items:center;
+  border:0;
+  background:transparent;
+  color:#38bdf8;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.caption-toggle:hover{
+  background:transparent;
+  color:#7dd3fc;
+  text-decoration:underline;
+}
+
+.caption-toggle:active{
+  background:transparent;
+}
+.confirm-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  box-sizing:border-box;
+}
+
+.confirm-modal.show{
+  display:flex;
+}
+
+.confirm-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(4px);
+}
+
+.confirm-dialog{
+  position:relative;
+  z-index:1;
+  width:min(380px,100%);
+  padding:22px;
+  box-sizing:border-box;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#0b2344;
+  box-shadow:0 24px 70px rgba(0,0,0,.5);
+  text-align:center;
+  animation:confirmPop .2s ease;
+}
+
+.confirm-icon{
+  width:48px;
+  height:48px;
+  margin:0 auto 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(239,68,68,.16);
+  border:1px solid rgba(239,68,68,.4);
+  color:#ef4444;
+  font-size:24px;
+  font-weight:700;
+}
+
+.confirm-dialog h3{
+  margin:0 0 8px;
+  color:#fff;
+}
+
+.confirm-dialog p{
+  margin:0;
+  color:rgba(255,255,255,.7);
+  line-height:1.5;
+  word-break:break-word;
+}
+
+.confirm-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+
+.confirm-btn{
+  height:36px;
+  border-radius:7px;
+  cursor:pointer;
+  color:#fff;
+  font-weight:600;
+}
+
+.confirm-cancel{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.07);
+}
+
+.confirm-cancel:hover{
+  background:rgba(255,255,255,.12);
+}
+
+.confirm-delete{
+  border:1px solid #ef4444;
+  background:#dc2626;
+}
+
+.confirm-delete:hover{
+  background:#ef4444;
+}
+
+body.confirm-open{
+  overflow:hidden;
+}
+
+@keyframes confirmPop{
+  from{
+    opacity:0;
+    transform:scale(.94) translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+@media(max-width:480px){
+  .confirm-actions{
+    grid-template-columns:1fr;
+  }
+}
+.layout-builder{
+  margin:6px 0 18px;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:rgba(0,0,0,.12);
+}
+
+.layout-add-wrap{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  gap:8px;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.layout-add-wrap .layout-button-input{
+  height:34px;
+  margin:0;
+}
+
+.layout-add-button,
+.layout-add-row{
+  height:34px;
+  white-space:nowrap;
+}
+
+.layout-rows{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  min-height:52px;
+}
+
+.layout-row{
+  min-height:48px;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  align-content:flex-start;
+  flex-wrap:wrap;
+  gap:7px;
+  border:1px dashed rgba(255,255,255,.2);
+  border-radius:9px;
+  background:rgba(0,0,0,.16);
+  transition:
+    border-color .2s,
+    background .2s;
+}
+
+.layout-row.drag-over{
+  border-color:#38bdf8;
+  background:rgba(56,189,248,.08);
+}
+
+.layout-row-head{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.layout-row-label{
+  color:rgba(255,255,255,.58);
+  font-size:11px;
+  font-weight:600;
+}
+
+.layout-remove-row{
+  width:23px;
+  min-width:23px;
+  height:23px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:5px;
+  background:transparent;
+  color:#ef4444;
+  font-size:16px;
+  line-height:1;
+}
+
+.layout-remove-row:hover{
+  background:rgba(239,68,68,.14);
+}
+
+.layout-chip{
+  max-width:260px;
+  min-height:30px;
+  padding:4px 6px 4px 10px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  box-sizing:border-box;
+  border:1px solid rgba(56,189,248,.38);
+  border-radius:6px;
+  background:rgba(22,104,220,.2);
+  color:#fff;
+  cursor:grab;
+  user-select:none;
+  touch-action:none;
+  transition:
+    opacity .2s,
+    border-color .2s,
+    background .2s;
+}
+
+.layout-chip:hover{
+  border-color:#38bdf8;
+  background:rgba(22,104,220,.3);
+}
+
+.layout-chip:active{
+  cursor:grabbing;
+}
+
+.layout-chip.dragging{
+  opacity:.35;
+}
+
+.layout-chip-text{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.layout-chip-remove{
+  width:20px;
+  min-width:20px;
+  height:20px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:14px;
+  line-height:1;
+}
+
+.layout-chip-remove:hover{
+  background:#ef4444;
+}
+
+.layout-output{
+  width:100%;
+  min-height:82px;
+  margin:12px 0 0;
+  opacity:.58;
+  resize:vertical;
+  cursor:default;
+}
+
+.layout-output:focus{
+  border-color:rgba(255,255,255,.15) !important;
+  box-shadow:none !important;
+}
+
+.save-layout-btn{
+  min-width:140px;
+  margin-top:16px;
+}
+.menu-layout-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap:16px;
+  align-items:stretch;
+}
+
+.menu-layout-column{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.menu-layout-column > label{
+  display:block;
+  margin-bottom:6px;
+}
+
+.menu-layout-column .layout-builder{
+  flex:1;
+  margin:0;
+  box-sizing:border-box;
+}
+
+@media(max-width:1100px){
+  .menu-layout-grid{
+    grid-template-columns:1fr;
+  }
+  .menu-layout-column .layout-builder{
+    min-height:0;
+  }
+}
+@media(max-width:700px){
+  .layout-add-wrap{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .layout-add-wrap .layout-button-input{
+    grid-column:1 / -1;
+  }
+
+  .layout-add-button,
+  .layout-add-row{
+    width:100%;
+  }
+}
+.menu-layout-column .layout-builder{
+  min-height:420px;
+}
+.btn-spinner{
+  width:13px;
+  height:13px;
+  display:none;
+  flex-shrink:0;
+  box-sizing:border-box;
+  border:2px solid rgba(255,255,255,.38);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:buttonSpin .7s linear infinite;
+}
+
+.submit-btn .btn-content{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+
+.submit-btn.loading{
+  opacity:.82;
+  pointer-events:none;
+  cursor:not-allowed;
+}
+
+.submit-btn.loading .btn-spinner{
+  display:inline-block;
+}
+
+@keyframes buttonSpin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+.edit-promo-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999998;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  box-sizing:border-box;
+}
+
+.edit-promo-modal.show{
+  display:flex;
+}
+
+.edit-promo-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(4px);
+}
+
+.edit-promo-dialog{
+  position:relative;
+  z-index:1;
+  width:min(540px,100%);
+  max-height:calc(100vh - 36px);
+  padding:18px;
+  overflow:auto;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  background:#0b2344;
+  box-shadow:0 24px 70px rgba(0,0,0,.55);
+  animation:editPromoPop .2s ease;
+}
+
+.edit-promo-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.edit-promo-header h3{
+  margin:0;
+}
+
+.edit-promo-close{
+  width:32px;
+  min-width:32px;
+  height:32px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  font-size:20px;
+}
+
+.edit-promo-close:hover{
+  background:rgba(239,68,68,.16);
+  color:#ef4444;
+}
+
+.edit-promo-dialog textarea{
+  min-height:160px;
+}
+
+.edit-promo-preview{
+  min-height:90px;
+  margin-top:4px;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  background:rgba(0,0,0,.18);
+}
+
+.edit-preview-label{
+  width:100%;
+  margin-bottom:8px;
+  color:rgba(255,255,255,.65);
+  font-size:12px;
+  text-align:left;
+}
+
+.edit-promo-preview img{
+  display:none;
+  max-width:100%;
+  max-height:220px;
+  border-radius:8px;
+  object-fit:contain;
+}
+
+.edit-preview-empty{
+  color:rgba(255,255,255,.45);
+  font-size:12px;
+}
+
+.edit-promo-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px;
+}
+
+.edit-promo-cancel{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.07);
+}
+
+.edit-promo-cancel:hover{
+  background:rgba(255,255,255,.12);
+}
+
+.edit-promo-save{
+  background:#1668dc;
+}
+
+body.edit-promo-open{
+  overflow:hidden;
+}
+
+@keyframes editPromoPop{
+  from{
+    opacity:0;
+    transform:scale(.95) translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+@media(max-width:520px){
+  .edit-promo-actions{
+    grid-template-columns:1fr;
+  }
+}
+.edit-inline-section{
+  margin-top:14px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  background:rgba(0,0,0,.14);
+}
+
+.edit-inline-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.edit-inline-title{
+  color:#38bdf8;
+  font-size:13px;
+  font-weight:700;
+}
+
+.edit-inline-hint{
+  margin-top:3px;
+  color:rgba(255,255,255,.5);
+  font-size:11px;
+}
+
+.edit-add-button{
+  flex-shrink:0;
+  white-space:nowrap;
+}
+
+.edit-inline-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.edit-inline-row{
+  display:grid;
+  grid-template-columns:
+    minmax(120px,.8fr)
+    minmax(180px,1.4fr)
+    auto;
+  gap:8px;
+  align-items:center;
+  padding:8px;
+  border:1px dashed rgba(255,255,255,.14);
+  border-radius:8px;
+  background:rgba(0,0,0,.12);
+}
+
+.edit-inline-row input{
+  min-width:0;
+  margin:0;
+}
+
+.edit-inline-remove{
+  width:32px;
+  min-width:32px;
+  height:32px;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(239,68,68,.35);
+  background:rgba(239,68,68,.1);
+  color:#ef4444;
+  font-size:18px;
+}
+
+.edit-inline-remove:hover{
+  border-color:#ef4444;
+  background:rgba(239,68,68,.2);
+}
+
+.edit-inline-empty{
+  padding:12px;
+  display:none;
+  border:1px dashed rgba(255,255,255,.12);
+  border-radius:8px;
+  color:rgba(255,255,255,.45);
+  font-size:12px;
+  text-align:center;
+}
+
+@media(max-width:620px){
+  .edit-inline-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .edit-add-button{
+    width:100%;
+  }
+
+  .edit-inline-row{
+    grid-template-columns:1fr;
+  }
+
+  .edit-inline-remove{
+    width:100%;
+  }
+}
+  </style>
+</head>
+
+<body>
+<div id="pageLoading" class="login-loading show">
+  <div class="loading-box">
+    <div class="loading-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="loading-text">
+      Please wait while fetching...
+    </div>
+  </div>
+</div>
+  
+<div class="topbar">
+  <div class="nav">
+
+    <a href="/admin">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z"/>
+      </svg>
+      <span class="nav-text">Dashboard</span>
+    </a>
+
+    <a href="/admin/promos">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M20 7h-2.2c.1-.3.2-.7.2-1a3 3 0 0 0-5.3-1.9L12 5l-.7-.9A3 3 0 0 0 6 6c0 .3.1.7.2 1H4a2 2 0 0 0-2 2v3h20V9a2 2 0 0 0-2-2zM8 5a1 1 0 0 1 .8.4L10 7H8a1 1 0 0 1 0-2zm8 0a1 1 0 0 1 0 2h-2l1.2-1.6A1 1 0 0 1 16 5zM3 14v6a2 2 0 0 0 2 2h6v-8H3zm10 0v8h6a2 2 0 0 0 2-2v-6h-8z"/>
+      </svg>
+      <span class="nav-text">Promos</span>
+    </a>
+
+    <a href="/admin/blast">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5l10-5zm0 7L2 4v13l10 5l10-5V4z"/>
+      </svg>
+      <span class="nav-text">Blast</span>
+    </a>
+
+    <a href="/admin/banner_buttons">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h1V3a1 1 0 0 1 1-1zm13 8H4v9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-9z"/>
+      </svg>
+      <span class="nav-text">Banner Buttons</span>
+    </a>
+
+    <a href="/admin/users">
+      <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zM8 11c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm8 2c-2 0-6 1-6 3v3h12v-3c0-2-4-3-6-3zM8 13c-2.3 0-6 1.2-6 3.5V19h6v-3c0-1 .4-2 1.2-2.8-.4-.1-.8-.2-1.2-.2z"/>
+      </svg>
+      <span class="nav-text">Users</span>
+    </a>
+
+  </div>
+
+  <div class="topbar-user" id="topbarUser">
+
+    <button
+      type="button"
+      class="username-btn"
+      id="usernameBtn">
+
+      <svg
+        class="username-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true">
+        <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/>
+      </svg>
+
+      <span class="username-text">
+        {{ session.get("admin_username", "Admin") }}
+      </span>
+
+      <svg
+        class="username-arrow"
+        viewBox="0 0 1024 1024"
+        aria-hidden="true">
+        <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"/>
+      </svg>
+
+    </button>
+
+    <div
+      class="username-menu"
+      id="usernameMenu">
+
+      <div class="username-menu-info">
+        <span>Signed in as</span>
+
+        <strong>
+          {{ session.get("admin_username", "Admin") }}
+        </strong>
+      </div>
+
+      <a href="/admin/logout" class="username-logout">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 3h9v2H6v14h7v2H4V3zm12.6 5.4L21.2 13l-4.6 4.6-1.4-1.4 2.2-2.2H10v-2h7.4l-2.2-2.2 1.4-1.4z"/>
+        </svg>
+
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="promo-grid">
+
+    <!-- ADD PROMO -->
+    <div class="card promo-add-card">
+      <h3>Add New Promo</h3>
+
+      <form method="POST" action="/admin/promos/add">
+        <label class="label-required">Title</label>
+        <input type="text" name="title" placeholder="Tittle Button" required>
+
+        <label class="label-required">Image URL</label>
+        <input type="text" name="image_url" placeholder="Image URL" required>
+
+        <label class="label-required">Caption</label>
+        <textarea name="caption" placeholder="Write you caption..." required></textarea>
+
+        <button
+  type="submit"
+  class="submit-btn"
+  data-loading-text="Add Promo...">
+
+  <span class="btn-content">
+    <span class="btn-spinner"></span>
+
+    <span class="btn-label">
+      Add Promo
+    </span>
+  </span>
+
+</button>
+      </form>
+    </div>
+
+<!-- PROMO LIST -->
+<div class="card promo-list-card">
+  <h3>Promo List</h3>
+
+  <div
+    class="promo-table-scroll"
+    id="promoTableScroll"
+    tabindex="0">
+
+    <table class="promo-table">
+
+      <thead>
+        <tr>
+          <th class="id-col">ID</th>
+          <th class="title-col">Title</th>
+          <th class="status-col">Status</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for p in promos %}
+        <tr>
+
+          <td>{{ p[0] }}</td>
+
+          <td class="promo-title-cell">
+
+            <div class="promo-title">
+              {{ p[1] }}
+            </div>
+
+            <div class="promo-caption-wrap">
+
+              <div class="promo-caption collapsed">
+                {{ p[3] }}
+              </div>
+
+              {% if p[3] %}
+              <button
+                type="button"
+                class="caption-toggle">
+                Expand
+              </button>
+              {% endif %}
+            </div>
+          </td>
+
+<td class="status-cell">
+  <a
+    href="/admin/promos/toggle/{{ p[0] }}"
+    class="status-switch {% if p[4] %}active{% else %}inactive{% endif %}"
+    aria-label="{% if p[4] %}Disable{% else %}Enable{% endif %} promo">
+    <span class="status-switch-text">
+      {% if p[4] %}
+        Active
+      {% else %}
+        Inactive
+      {% endif %}
+    </span>
+    <span class="status-switch-knob"></span>
+  </a>
+</td>
+
+          <td class="actions-cell">
+            <div class="actions-wrap">
+
+<button
+  type="button"
+  class="btn btn-edit promo-edit-btn"
+  data-promo-id="{{ p[0] }}"
+  data-promo-title="{{ p[1] | e }}"
+  data-promo-image="{{ p[2] | e }}"
+  data-promo-caption="{{ p[3] | e }}"
+  data-promo-buttons="{{ promo_buttons_by_promo.get(p[0], []) | tojson | forceescape }}">
+  Edit
+</button>
+
+<a
+  class="btn btn-delete promo-delete-btn"
+  href="/admin/promos/delete/{{ p[0] }}"
+  data-promo-title="{{ p[1] }}">
+  Delete
+</a>
+
+            </div>
+
+          </td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+</div>
+    <!-- KEYBOARD LAYOUT SETTINGS -->
+    <div class="card keyboard-card">
+      <h3>Button Layout Settings</h3>
+<form
+  method="POST"
+  action="/admin/menu_layout"
+  id="menuLayoutForm">
+
+  <div class="menu-layout-grid">
+
+    <!-- BASE MENU COLUMN -->
+    <div class="menu-layout-column">
+
+      <label class="label-required">
+        Base Menu Layout
+      </label>
+
+      <div
+        class="layout-builder"
+        data-layout-builder>
+
+        <div class="layout-add-wrap">
+
+          <input
+            type="text"
+            class="layout-button-input"
+            placeholder="Example: 📋 MENU">
+
+          <button
+            type="button"
+            class="layout-add-button">
+            + Add Button
+          </button>
+
+          <button
+            type="button"
+            class="layout-add-row">
+            + Add Row
+          </button>
+
+        </div>
+
+        <div
+          class="layout-rows"
+          data-layout-rows>
+        </div>
+
+        <textarea
+          name="base_menu_layout"
+          class="layout-output"
+          required
+          readonly>{{ base_layout }}</textarea>
+
+      </div>
+
+    </div>
+
+    <!-- PROMO MENU COLUMN -->
+    <div class="menu-layout-column">
+
+      <label class="label-required">
+        Promo Menu Layout
+      </label>
+
+      <div
+        class="layout-builder"
+        data-layout-builder>
+
+        <div class="layout-add-wrap">
+
+          <input
+            type="text"
+            class="layout-button-input"
+            placeholder="Example: 🔥 Promo 1">
+
+          <button
+            type="button"
+            class="layout-add-button">
+            + Add Button
+          </button>
+
+          <button
+            type="button"
+            class="layout-add-row">
+            + Add Row
+          </button>
+
+        </div>
+
+        <div
+          class="layout-rows"
+          data-layout-rows>
+        </div>
+
+        <textarea
+          name="promo_menu_layout"
+          class="layout-output"
+          required
+          readonly>{{ promo_layout }}</textarea>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<button
+  type="submit"
+  class="save-layout-btn submit-btn"
+  data-loading-text="Save Layout...">
+
+  <span class="btn-content">
+    <span class="btn-spinner"></span>
+
+    <span class="btn-label">
+      Save Layout
+    </span>
+  </span>
+
+</button>
+
+</form>
+    </div>
+  </div>
+<div
+  class="confirm-modal"
+  id="deleteConfirmModal"
+  aria-hidden="true">
+
+  <div
+    class="confirm-backdrop"
+    data-close-delete-modal>
+  </div>
+
+  <div
+    class="confirm-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="deleteConfirmTitle">
+
+    <div class="confirm-icon">!</div>
+
+    <h3 id="deleteConfirmTitle">
+      Delete Promo?
+    </h3>
+
+    <p id="deleteConfirmText">
+      Are you sure you want to delete this promo?
+    </p>
+
+    <div class="confirm-actions">
+
+      <button
+        type="button"
+        class="confirm-btn confirm-cancel"
+        data-close-delete-modal>
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="confirm-btn confirm-delete"
+        id="confirmDeletePromo">
+        Delete
+      </button>
+
+    </div>
+
+  </div>
+</div>
+<div
+  class="edit-promo-modal"
+  id="editPromoModal"
+  aria-hidden="true">
+
+  <div
+    class="edit-promo-backdrop"
+    data-close-edit-promo>
+  </div>
+
+  <div
+    class="edit-promo-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="editPromoModalTitle">
+
+    <div class="edit-promo-header">
+
+      <h3 id="editPromoModalTitle">
+        Edit Promo
+      </h3>
+
+      <button
+        type="button"
+        class="edit-promo-close"
+        data-close-edit-promo
+        aria-label="Close">
+        ×
+      </button>
+
+    </div>
+
+    <form
+      method="POST"
+      id="editPromoForm">
+
+      <label class="label-required">
+        Title
+      </label>
+
+      <input
+        type="text"
+        name="title"
+        id="editPromoTitleInput"
+        required>
+
+      <label class="label-required">
+        Image URL
+      </label>
+
+      <input
+        type="text"
+        name="image_url"
+        id="editPromoImageInput"
+        required>
+
+      <label class="label-required">
+        Caption
+      </label>
+
+      <textarea
+        name="caption"
+        id="editPromoCaptionInput"
+        required></textarea>
+
+      <div class="edit-promo-preview">
+
+        <div class="edit-preview-label">
+          Image Preview
+        </div>
+
+        <img
+          id="editPromoPreview"
+          alt="Promo Preview">
+
+        <div
+          class="edit-preview-empty"
+          id="editPreviewEmpty">
+          No image preview
+        </div>
+      </div>
+      
+<div class="edit-inline-section">
+  <div class="edit-inline-header">
+    <div>
+      <div class="edit-inline-title">
+        Inline Buttons
+      </div>
+
+      <div class="edit-inline-hint">
+        Buttons displayed below this promo in Telegram.
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="edit-add-button"
+      id="editAddPromoButton">
+      + Add Button
+    </button>
+
+  </div>
+
+  <div
+    class="edit-inline-list"
+    id="editPromoButtonsList">
+  </div>
+
+  <div
+    class="edit-inline-empty"
+    id="editPromoButtonsEmpty">
+    No inline buttons added.
+  </div>
+</div>
+      
+      <div class="edit-promo-actions">
+
+        <button
+          type="button"
+          class="edit-promo-cancel"
+          data-close-edit-promo>
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="edit-promo-save submit-btn"
+          data-loading-text="Saving...">
+
+          <span class="btn-content">
+            <span class="btn-spinner"></span>
+            <span class="btn-label">
+              Save Changes
+            </span>
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+  <script>
+const currentPath = window.location.pathname;
+
+document.querySelectorAll(".nav a").forEach(link => {
+  const href = link.getAttribute("href");
+
+  link.classList.remove("active");
+
+  if (href === currentPath) {
+    link.classList.add("active");
+  }
+});
+
+const loading = document.getElementById("pageLoading");
+
+function showLoading(){
+  if (loading) loading.classList.add("show");
+}
+
+function hideLoading(){
+  if (loading) loading.classList.remove("show");
+}
+
+function resetSubmitButtons(){
+  document
+    .querySelectorAll(".submit-btn")
+    .forEach(button => {
+
+      button.classList.remove("loading");
+      button.disabled = false;
+
+      const label =
+        button.querySelector(".btn-label");
+
+      if(
+        label &&
+        button.dataset.originalText
+      ){
+        label.textContent =
+          button.dataset.originalText;
+      }
+
+    });
+}
+
+window.addEventListener(
+  "load",
+  function(){
+    hideLoading();
+    resetSubmitButtons();
+  }
+);
+
+window.addEventListener(
+  "pageshow",
+  function(){
+    hideLoading();
+    resetSubmitButtons();
+  }
+);
+
+window.addEventListener("beforeunload", () => {
+  showLoading();
+});
+
+document.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", function () {
+    const href = this.getAttribute("href");
+
+    if(
+      this.classList.contains("status-switch") ||
+      this.classList.contains("promo-delete-btn")
+    ){
+      return;
+    }
+
+    if (
+      !href ||
+      href.startsWith("#") ||
+      href.startsWith("javascript:") ||
+      this.target === "_blank"
+    ) {
+      return;
+    }
+
+    showLoading();
+  });
+});
+
+document
+  .querySelectorAll("form")
+  .forEach(form => {
+
+    form.addEventListener(
+      "submit",
+      function(event){
+
+        if(form.dataset.submitting === "true"){
+          event.preventDefault();
+          return;
+        }
+
+        const submitter =
+          event.submitter ||
+          form.querySelector(
+            'button[type="submit"]'
+          );
+
+        form.dataset.submitting = "true";
+
+        if(submitter){
+          const label =
+            submitter.querySelector(
+              ".btn-label"
+            );
+
+          if(label){
+            submitter.dataset.originalText =
+              label.textContent.trim();
+
+            label.textContent =
+              submitter.dataset.loadingText ||
+              "Please wait...";
+          }
+
+          submitter.classList.add("loading");
+          submitter.disabled = true;
+        }
+
+        showLoading();
+      }
+    );
+
+  });
+const topbarUser =
+  document.getElementById("topbarUser");
+
+const usernameBtn =
+  document.getElementById("usernameBtn");
+
+const usernameMenu =
+  document.getElementById("usernameMenu");
+
+if(
+  topbarUser &&
+  usernameBtn &&
+  usernameMenu
+){
+  usernameBtn.addEventListener(
+    "click",
+    function(event){
+      event.stopPropagation();
+      topbarUser.classList.toggle("open");
+    }
+  );
+
+  usernameMenu.addEventListener(
+    "click",
+    function(event){
+      event.stopPropagation();
+    }
+  );
+
+  document.addEventListener(
+    "click",
+    function(){
+      topbarUser.classList.remove("open");
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    function(event){
+      if(event.key === "Escape"){
+        topbarUser.classList.remove("open");
+      }
+    }
+  );
+}
+document
+  .querySelectorAll(".caption-toggle")
+  .forEach(button => {
+
+    button.addEventListener("click", function(){
+      const captionWrap =
+        this.closest(".promo-caption-wrap");
+
+      const caption =
+        captionWrap.querySelector(
+          ".promo-caption"
+        );
+
+      const isCollapsed =
+        caption.classList.contains(
+          "collapsed"
+        );
+
+      caption.classList.toggle(
+        "collapsed",
+        !isCollapsed
+      );
+
+      this.textContent =
+        isCollapsed
+          ? "Collapse"
+          : "Expand";
+    });
+  });
+    
+  const promoTableScroll =
+  document.getElementById(
+    "promoTableScroll"
+  );
+
+if(promoTableScroll){
+  promoTableScroll.addEventListener(
+    "wheel",
+    function(event){
+
+      if(!event.shiftKey){
+        return;
+      }
+
+      event.preventDefault();
+
+      promoTableScroll.scrollLeft +=
+        event.deltaY;
+
+    },
+    {
+      passive:false
+    }
+  );
+}
+const deleteConfirmModal =
+  document.getElementById(
+    "deleteConfirmModal"
+  );
+
+const deleteConfirmText =
+  document.getElementById(
+    "deleteConfirmText"
+  );
+
+const confirmDeletePromo =
+  document.getElementById(
+    "confirmDeletePromo"
+  );
+
+let pendingDeleteUrl = "";
+
+function openDeleteModal(
+  deleteUrl,
+  promoTitle
+){
+  pendingDeleteUrl = deleteUrl;
+
+  deleteConfirmText.textContent =
+    promoTitle
+      ? `Are you sure you want to delete "${promoTitle}"?`
+      : "Are you sure you want to delete this promo?";
+
+  deleteConfirmModal.classList.add(
+    "show"
+  );
+
+  deleteConfirmModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "confirm-open"
+  );
+
+  confirmDeletePromo.focus();
+}
+
+function closeDeleteModal(){
+  deleteConfirmModal.classList.remove(
+    "show"
+  );
+
+  deleteConfirmModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove(
+    "confirm-open"
+  );
+
+  pendingDeleteUrl = "";
+}
+
+document
+  .querySelectorAll(".promo-delete-btn")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function(event){
+        event.preventDefault();
+        event.stopPropagation();
+
+        openDeleteModal(
+          this.href,
+          this.dataset.promoTitle
+        );
+      }
+    );
+
+  });
+
+document
+  .querySelectorAll(
+    "[data-close-delete-modal]"
+  )
+  .forEach(element => {
+
+    element.addEventListener(
+      "click",
+      closeDeleteModal
+    );
+
+  });
+
+confirmDeletePromo.addEventListener(
+  "click",
+  function(){
+
+    if(!pendingDeleteUrl){
+      return;
+    }
+
+    const deleteUrl =
+      pendingDeleteUrl;
+
+    closeDeleteModal();
+    showLoading();
+
+    window.location.href =
+      deleteUrl;
+  }
+);
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Escape" &&
+      deleteConfirmModal.classList.contains(
+        "show"
+      )
+    ){
+      closeDeleteModal();
+    }
+
+  }
+);
+document
+  .querySelectorAll("[data-layout-builder]")
+  .forEach(builder => {
+
+    const input =
+      builder.querySelector(
+        ".layout-button-input"
+      );
+
+    const addButton =
+      builder.querySelector(
+        ".layout-add-button"
+      );
+
+    const addRowButton =
+      builder.querySelector(
+        ".layout-add-row"
+      );
+
+    const rowsWrap =
+      builder.querySelector(
+        "[data-layout-rows]"
+      );
+
+    const output =
+      builder.querySelector(
+        ".layout-output"
+      );
+
+    let draggedChip = null;
+
+    function createChip(text){
+      const chip =
+        document.createElement("div");
+
+      chip.className = "layout-chip";
+      chip.draggable = true;
+
+      chip.innerHTML = `
+        <span class="layout-chip-text"></span>
+
+        <button
+          type="button"
+          class="layout-chip-remove"
+          aria-label="Remove button">
+          ×
+        </button>
+      `;
+
+      chip
+        .querySelector(
+          ".layout-chip-text"
+        )
+        .textContent = text;
+
+      chip.addEventListener(
+        "dragstart",
+        function(){
+          draggedChip = chip;
+          chip.classList.add("dragging");
+        }
+      );
+
+      chip.addEventListener(
+        "dragend",
+        function(){
+          draggedChip = null;
+          chip.classList.remove("dragging");
+
+          rowsWrap
+            .querySelectorAll(
+              ".layout-row"
+            )
+            .forEach(row => {
+              row.classList.remove(
+                "drag-over"
+              );
+            });
+
+          removeEmptyRows();
+          updateRowLabels();
+          updateOutput();
+        }
+      );
+
+      chip
+        .querySelector(
+          ".layout-chip-remove"
+        )
+        .addEventListener(
+          "click",
+          function(){
+            chip.remove();
+
+            removeEmptyRows();
+            updateRowLabels();
+            updateOutput();
+          }
+        );
+
+      return chip;
+    }
+
+    function createRow(){
+      const row =
+        document.createElement("div");
+
+      row.className = "layout-row";
+
+      row.innerHTML = `
+        <div class="layout-row-head">
+          <span class="layout-row-label">
+            Row
+          </span>
+
+          <button
+            type="button"
+            class="layout-remove-row"
+            aria-label="Remove row">
+            ×
+          </button>
+        </div>
+      `;
+
+      row.addEventListener(
+        "dragover",
+        function(event){
+          event.preventDefault();
+
+          if(!draggedChip){
+            return;
+          }
+
+          row.classList.add(
+            "drag-over"
+          );
+
+          const afterElement =
+            getDragAfterElement(
+              row,
+              event.clientX,
+              event.clientY
+            );
+
+          if(afterElement){
+            row.insertBefore(
+              draggedChip,
+              afterElement
+            );
+          }else{
+            row.appendChild(
+              draggedChip
+            );
+          }
+        }
+      );
+
+      row.addEventListener(
+        "dragleave",
+        function(event){
+          if(
+            !row.contains(
+              event.relatedTarget
+            )
+          ){
+            row.classList.remove(
+              "drag-over"
+            );
+          }
+        }
+      );
+
+      row.addEventListener(
+        "drop",
+        function(event){
+          event.preventDefault();
+
+          row.classList.remove(
+            "drag-over"
+          );
+
+          updateOutput();
+        }
+      );
+
+      row
+        .querySelector(
+          ".layout-remove-row"
+        )
+        .addEventListener(
+          "click",
+          function(){
+            const rows =
+              rowsWrap.querySelectorAll(
+                ".layout-row"
+              );
+
+            if(rows.length <= 1){
+              row
+                .querySelectorAll(
+                  ".layout-chip"
+                )
+                .forEach(chip => {
+                  chip.remove();
+                });
+            }else{
+              row.remove();
+            }
+
+            updateRowLabels();
+            updateOutput();
+          }
+        );
+
+      rowsWrap.appendChild(row);
+      updateRowLabels();
+
+      return row;
+    }
+
+    function getDragAfterElement(
+      container,
+      x,
+      y
+    ){
+      const chips = [
+        ...container.querySelectorAll(
+          ".layout-chip:not(.dragging)"
+        )
+      ];
+
+      let nearest = null;
+      let nearestDistance = Infinity;
+
+      chips.forEach(chip => {
+        const box =
+          chip.getBoundingClientRect();
+
+        const centerX =
+          box.left + box.width / 2;
+
+        const centerY =
+          box.top + box.height / 2;
+
+        const distance =
+          Math.hypot(
+            x - centerX,
+            y - centerY
+          );
+
+        if(
+          x < centerX &&
+          distance < nearestDistance
+        ){
+          nearest = chip;
+          nearestDistance = distance;
+        }
+      });
+
+      return nearest;
+    }
+
+    function updateRowLabels(){
+      rowsWrap
+        .querySelectorAll(
+          ".layout-row"
+        )
+        .forEach(
+          (row, index) => {
+            row
+              .querySelector(
+                ".layout-row-label"
+              )
+              .textContent =
+                `Row ${index + 1}`;
+          }
+        );
+    }
+
+    function removeEmptyRows(){
+      const rows = [
+        ...rowsWrap.querySelectorAll(
+          ".layout-row"
+        )
+      ];
+
+      rows.forEach(
+        (row, index) => {
+          const hasChip =
+            row.querySelector(
+              ".layout-chip"
+            );
+
+          if(
+            !hasChip &&
+            rows.length > 1 &&
+            index !== 0
+          ){
+            row.remove();
+          }
+        }
+      );
+    }
+
+    function updateOutput(){
+      const lines = [
+        ...rowsWrap.querySelectorAll(
+          ".layout-row"
+        )
+      ]
+        .map(row => {
+          return [
+            ...row.querySelectorAll(
+              ".layout-chip-text"
+            )
+          ]
+            .map(element =>
+              element.textContent.trim()
+            )
+            .filter(Boolean)
+            .join(", ");
+        })
+        .filter(Boolean);
+
+      output.value =
+        lines.join("\n");
+    }
+
+    function loadFromTextarea(){
+      rowsWrap.innerHTML = "";
+
+      const lines =
+        output.value
+          .split(/\r?\n/)
+          .map(line => line.trim())
+          .filter(Boolean);
+
+      if(!lines.length){
+        createRow();
+        updateOutput();
+        return;
+      }
+
+      lines.forEach(line => {
+        const row = createRow();
+
+        line
+          .split(",")
+          .map(item => item.trim())
+          .filter(Boolean)
+          .forEach(text => {
+            row.appendChild(
+              createChip(text)
+            );
+          });
+      });
+
+      updateRowLabels();
+      updateOutput();
+    }
+
+    function addNewButton(){
+      const text =
+        input.value.trim();
+
+      if(!text){
+        input.focus();
+        return;
+      }
+
+      let targetRow =
+        rowsWrap.querySelector(
+          ".layout-row:last-child"
+        );
+
+      if(!targetRow){
+        targetRow = createRow();
+      }
+
+      targetRow.appendChild(
+        createChip(text)
+      );
+
+      input.value = "";
+      input.focus();
+
+      updateOutput();
+    }
+
+    addButton.addEventListener(
+      "click",
+      addNewButton
+    );
+
+    addRowButton.addEventListener(
+      "click",
+      function(){
+        createRow();
+        updateOutput();
+      }
+    );
+
+    input.addEventListener(
+      "keydown",
+      function(event){
+        if(event.key === "Enter"){
+          event.preventDefault();
+          addNewButton();
+        }
+      }
+    );
+
+    loadFromTextarea();
+  });
+  const menuLayoutForm =
+  document.getElementById(
+    "menuLayoutForm"
+  );
+
+if(menuLayoutForm){
+  menuLayoutForm.addEventListener(
+    "submit",
+    function(){
+      document
+        .querySelectorAll(
+          "[data-layout-builder]"
+        )
+        .forEach(builder => {
+          const output =
+            builder.querySelector(
+              ".layout-output"
+            );
+
+          output.dispatchEvent(
+            new Event("change")
+          );
+        });
+    }
+  );
+}
+const editPromoModal =
+  document.getElementById(
+    "editPromoModal"
+  );
+
+const editPromoForm =
+  document.getElementById(
+    "editPromoForm"
+  );
+
+const editPromoTitleInput =
+  document.getElementById(
+    "editPromoTitleInput"
+  );
+
+const editPromoImageInput =
+  document.getElementById(
+    "editPromoImageInput"
+  );
+
+const editPromoCaptionInput =
+  document.getElementById(
+    "editPromoCaptionInput"
+  );
+
+const editPromoPreview =
+  document.getElementById(
+    "editPromoPreview"
+  );
+
+const editPreviewEmpty =
+  document.getElementById(
+    "editPreviewEmpty"
+  );
+const editPromoButtonsList =
+  document.getElementById(
+    "editPromoButtonsList"
+  );
+
+const editPromoButtonsEmpty =
+  document.getElementById(
+    "editPromoButtonsEmpty"
+  );
+
+const editAddPromoButton =
+  document.getElementById(
+    "editAddPromoButton"
+  );
+  function updateEditButtonsEmpty(){
+  const hasRows =
+    editPromoButtonsList.querySelector(
+      ".edit-inline-row"
+    );
+
+  editPromoButtonsEmpty.style.display =
+    hasRows ? "none" : "block";
+}
+
+function createEditPromoButtonRow(
+  text = "",
+  url = ""
+){
+  const row =
+    document.createElement("div");
+
+  row.className =
+    "edit-inline-row";
+
+  row.innerHTML = `
+    <input
+      type="text"
+      name="button_text[]"
+      placeholder="Button name"
+      required>
+
+    <input
+      type="url"
+      name="button_url[]"
+      placeholder="https://yourdomain.com"
+      required>
+
+    <button
+      type="button"
+      class="edit-inline-remove"
+      aria-label="Remove button">
+      ×
+    </button>
+  `;
+
+  const textInput =
+    row.querySelector(
+      'input[name="button_text[]"]'
+    );
+
+  const urlInput =
+    row.querySelector(
+      'input[name="button_url[]"]'
+    );
+
+  const removeButton =
+    row.querySelector(
+      ".edit-inline-remove"
+    );
+
+  textInput.value =
+    text || "";
+
+  urlInput.value =
+    url || "";
+
+  removeButton.addEventListener(
+    "click",
+    function(){
+      row.remove();
+      updateEditButtonsEmpty();
+    }
+  );
+
+  editPromoButtonsList.appendChild(
+    row
+  );
+
+  updateEditButtonsEmpty();
+
+  return row;
+}
+
+function loadEditPromoButtons(buttons){
+  editPromoButtonsList.innerHTML =
+    "";
+
+  if(
+    !Array.isArray(buttons) ||
+    buttons.length === 0
+  ){
+    updateEditButtonsEmpty();
+    return;
+  }
+
+  buttons.forEach(button => {
+    createEditPromoButtonRow(
+      button.text || "",
+      button.url || ""
+    );
+  });
+
+  updateEditButtonsEmpty();
+}
+function updateEditPreview(){
+  const imageUrl =
+    editPromoImageInput.value.trim();
+
+  if(!imageUrl){
+    editPromoPreview.removeAttribute(
+      "src"
+    );
+
+    editPromoPreview.style.display =
+      "none";
+
+    editPreviewEmpty.style.display =
+      "block";
+
+    return;
+  }
+
+  editPromoPreview.src =
+    imageUrl;
+
+  editPromoPreview.style.display =
+    "block";
+
+  editPreviewEmpty.style.display =
+    "none";
+}
+
+function openEditPromoModal(button){
+  const promoId =
+    button.dataset.promoId;
+
+  editPromoTitleInput.value =
+    button.dataset.promoTitle || "";
+
+  editPromoImageInput.value =
+    button.dataset.promoImage || "";
+
+  editPromoCaptionInput.value =
+    button.dataset.promoCaption || "";
+  let promoButtons = [];
+
+try{
+  promoButtons = JSON.parse(
+    button.dataset.promoButtons ||
+    "[]"
+  );
+}catch(error){
+  console.error(
+    "Invalid promo buttons data:",
+    error
+  );
+
+  promoButtons = [];
+}
+
+loadEditPromoButtons(
+  promoButtons
+);
+
+  editPromoForm.action =
+    `/admin/promo/${promoId}`;
+
+  updateEditPreview();
+
+  editPromoModal.classList.add(
+    "show"
+  );
+
+  editPromoModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "edit-promo-open"
+  );
+
+  setTimeout(function(){
+    editPromoTitleInput.focus();
+  }, 0);
+}
+
+function closeEditPromoModal(){
+  editPromoModal.classList.remove(
+    "show"
+  );
+
+  editPromoModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove(
+    "edit-promo-open"
+  );
+
+  editPromoForm.reset();
+  
+editPromoButtonsList.innerHTML =
+  "";
+
+updateEditButtonsEmpty();
+  editPromoForm.removeAttribute(
+    "action"
+  );
+
+  editPromoPreview.removeAttribute(
+    "src"
+  );
+
+  editPromoPreview.style.display =
+    "none";
+
+  editPreviewEmpty.style.display =
+    "block";
+
+  editPromoForm.dataset.submitting =
+    "false";
+
+  const saveButton =
+    editPromoForm.querySelector(
+      ".submit-btn"
+    );
+
+  if(saveButton){
+    saveButton.classList.remove(
+      "loading"
+    );
+
+    saveButton.disabled = false;
+
+    const label =
+      saveButton.querySelector(
+        ".btn-label"
+      );
+
+    if(label){
+      label.textContent =
+        "Save Changes";
+    }
+  }
+}
+    
+editAddPromoButton.addEventListener(
+  "click",
+  function(){
+    const row =
+      createEditPromoButtonRow();
+
+    const firstInput =
+      row.querySelector("input");
+
+    if(firstInput){
+      firstInput.focus();
+    }
+  }
+);
+document
+  .querySelectorAll(".promo-edit-btn")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function(){
+        openEditPromoModal(this);
+      }
+    );
+
+  });
+
+document
+  .querySelectorAll(
+    "[data-close-edit-promo]"
+  )
+  .forEach(element => {
+
+    element.addEventListener(
+      "click",
+      closeEditPromoModal
+    );
+
+  });
+
+editPromoImageInput.addEventListener(
+  "input",
+  updateEditPreview
+);
+
+editPromoPreview.addEventListener(
+  "error",
+  function(){
+    editPromoPreview.style.display =
+      "none";
+
+    editPreviewEmpty.style.display =
+      "block";
+
+    editPreviewEmpty.textContent =
+      "Image could not be loaded";
+  }
+);
+
+editPromoPreview.addEventListener(
+  "load",
+  function(){
+    editPromoPreview.style.display =
+      "block";
+
+    editPreviewEmpty.style.display =
+      "none";
+
+    editPreviewEmpty.textContent =
+      "No image preview";
+  }
+);
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Escape" &&
+      editPromoModal.classList.contains(
+        "show"
+      )
+    ){
+      closeEditPromoModal();
+    }
+
+  }
+);
+</script>
+</body>
+</html>
